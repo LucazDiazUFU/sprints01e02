@@ -1,0 +1,10 @@
+id_ativo = int(input("Digite o ID do ativo: "))
+nome = input("Digite o nome do ativo: ").strip()
+responsavel = input("Digite o responsável pelo ativo: ").strip()
+localizacao = input("Digite a localização do ativo: ").strip()
+
+print("\nAtivo cadastrado")
+print(f"ID: {id_ativo}")
+print(f"Nome: {nome}")
+print(f"Responsável: {responsavel}")
+print(f"Localização: {localizacao}")
