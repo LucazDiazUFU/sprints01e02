@@ -24,4 +24,4 @@
 
 ## Definição de pronto
 
-Código versionado, execução limpa, testes aprovados, README com instruções e demonstração dos dez requisitos. Uma revisão por outro integrante ou pelo docente só pode ser registrada após acontecer.
+Código versionado, execução limpa, testes aprovados, README com instruções e demonstração dos dez requisitos. A revisão final será feita pelo estudante; a apresentação e a avaliação ocorrerão em sala.
