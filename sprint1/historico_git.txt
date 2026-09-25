@@ -1,0 +1,17 @@
+*   bbc2ab1 Resolve conflito de status
+|\  
+| * 4df9d97 Altera status para ativo
+* | 3ee691c Altera status para manutenção
+|/  
+* 7b4ea7a Adiciona exemplo de status
+*   d912b94 Integra tratamento de erros
+|\  
+| * 71af153 Trata erros no cadastro de ativos
+|/  
+*   b45afcb Integra status de ativos
+|\  
+| * e7fd86f Adiciona status de ativos com Enum
+|/  
+* 15459cc Salva vulnerabilidades em JSON
+* 438d7c1 Adiciona cadastro de vulnerabilidades
+* f486d2d Adiciona cadastro de ativos em lista

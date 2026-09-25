@@ -1,0 +1,31 @@
+test_arquivo_com_id_duplicado (test_trabalho1.TesteInventario.test_arquivo_com_id_duplicado) ... ok
+test_arquivo_com_raiz_invalida_preservado (test_trabalho1.TesteInventario.test_arquivo_com_raiz_invalida_preservado) ... ok
+test_arquivo_corrompido_preservado (test_trabalho1.TesteInventario.test_arquivo_corrompido_preservado) ... ok
+test_atualizacao_de_inexistente (test_trabalho1.TesteInventario.test_atualizacao_de_inexistente) ... ok
+test_atualizacao_invalida_preserva_ativo (test_trabalho1.TesteInventario.test_atualizacao_invalida_preserva_ativo) ... ok
+test_atualizacao_parcial_e_historico (test_trabalho1.TesteInventario.test_atualizacao_parcial_e_historico) ... ok
+test_atualizar_vulnerabilidade (test_trabalho1.TesteInventario.test_atualizar_vulnerabilidade) ... ok
+test_busca_e_filtros_combinados (test_trabalho1.TesteInventario.test_busca_e_filtros_combinados) ... ok
+test_cadastrar_buscar_por_id_e_nome (test_trabalho1.TesteInventario.test_cadastrar_buscar_por_id_e_nome) ... ok
+test_cadastrar_e_consultar_vulnerabilidade (test_trabalho1.TesteInventario.test_cadastrar_e_consultar_vulnerabilidade) ... ok
+test_cadastro_com_campo_vazio (test_trabalho1.TesteInventario.test_cadastro_com_campo_vazio) ... ok
+test_cadastro_com_id_repetido (test_trabalho1.TesteInventario.test_cadastro_com_id_repetido) ... ok
+test_cadastro_com_nome_repetido (test_trabalho1.TesteInventario.test_cadastro_com_nome_repetido) ... ok
+test_cadastro_invalido_nao_altera_base (test_trabalho1.TesteInventario.test_cadastro_invalido_nao_altera_base) ... ok
+test_cve_cvss_e_filtros (test_trabalho1.TesteInventario.test_cve_cvss_e_filtros) ... ok
+test_cve_invalida (test_trabalho1.TesteInventario.test_cve_invalida) ... ok
+test_cvss_fora_da_faixa_e_nan (test_trabalho1.TesteInventario.test_cvss_fora_da_faixa_e_nan) ... ok
+test_enum_tem_quatro_tipos_ou_mais (test_trabalho1.TesteInventario.test_enum_tem_quatro_tipos_ou_mais) ... ok
+test_excluir_vulnerabilidade (test_trabalho1.TesteInventario.test_excluir_vulnerabilidade) ... ok
+test_exclusao_de_inexistente (test_trabalho1.TesteInventario.test_exclusao_de_inexistente) ... ok
+test_exclusao_exige_confirmacao_e_remove_vulnerabilidades (test_trabalho1.TesteInventario.test_exclusao_exige_confirmacao_e_remove_vulnerabilidades) ... ok
+test_menu_com_entrada_invalida_e_saida (test_trabalho1.TesteInventario.test_menu_com_entrada_invalida_e_saida) ... ok
+test_persistencia_apos_reiniciar (test_trabalho1.TesteInventario.test_persistencia_apos_reiniciar) ... ok
+test_vulnerabilidade_duplicada (test_trabalho1.TesteInventario.test_vulnerabilidade_duplicada) ... ok
+test_vulnerabilidade_inicial (test_trabalho1.TesteInventario.test_vulnerabilidade_inicial) ... ok
+test_vulnerabilidade_sem_ativo (test_trabalho1.TesteInventario.test_vulnerabilidade_sem_ativo) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.003s
+
+OK
