@@ -1,0 +1,8 @@
+services:
+  inventario:
+    networks:
+      - banco_existente
+networks:
+  banco_existente:
+    external: true
+    name: ${DB_DOCKER_NETWORK:?Informe a rede Docker compartilhada com o banco}

@@ -1,0 +1,60 @@
+services:
+  mariadb:
+    image: mariadb:11.8
+    environment:
+      MARIADB_DATABASE: ${DB_NAME:?Configure DB_NAME}
+      MARIADB_USER: ${DB_USER:?Configure DB_USER}
+      MARIADB_PASSWORD: ${DB_PASSWORD:?Configure DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Configure DB_ROOT_PASSWORD}
+    volumes:
+      - banco:/var/lib/mysql
+      - ./deploy/schema_mariadb.sql:/docker-entrypoint-initdb.d/01-trabalho2.sql:ro
+    healthcheck:
+      test: [CMD, healthcheck.sh, --connect, --innodb_initialized]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    restart: unless-stopped
+    stop_grace_period: 30s
+    mem_limit: 512m
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+  inventario:
+    build: .
+    environment:
+      DB_ENGINE: mariadb
+      DB_HOST: mariadb
+      DB_PORT: "3306"
+      DB_NAME: ${DB_NAME:?Configure DB_NAME}
+      DB_USER: ${DB_USER:?Configure DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD:?Configure DB_PASSWORD}
+      INVENTARIO_PRODUCAO: "1"
+      INVENTARIO_TOKEN: ${INVENTARIO_TOKEN:?Configure INVENTARIO_TOKEN}
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:5000:5000"
+    volumes:
+      - dados:/app/dados
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+    stop_grace_period: 30s
+    mem_limit: 512m
+    cpus: 1.0
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+volumes:
+  banco:
+  dados:

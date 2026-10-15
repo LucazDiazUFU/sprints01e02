@@ -1,3 +1,13 @@
+# Trabalho 02 — MariaDB e Docker
+
+A entrega atual continua o projeto do Trabalho 01. Comece pelo [guia de implantação](docs/trabalho2/IMPLANTACAO.md) e pela [relação com o roteiro](docs/trabalho2/REQUISITOS.md). O Dockerfile inicia a API com MariaDB e autenticação por token.
+
+A configuração de exemplo está em `.env.example`. Use o ambiente do EasyPanel para as credenciais reais. Os dados ficam no MariaDB; a exportação gera uma lista JSON de equipamentos.
+
+Os testes estão pausados. O adaptador MariaDB e a imagem precisam de conferência na VPS; as 24h ainda devem ser comprovadas.
+
+---
+
 # Trabalho 1 — inventário de segurança
 
 Programa em Python para cadastrar ativos de TI e acompanhar as vulnerabilidades associadas. O menu funciona no terminal. Os dados ficam em `trabalho1/ativos.json`, criado na primeira alteração, e continuam disponíveis após fechar o programa.

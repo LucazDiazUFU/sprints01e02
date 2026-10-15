@@ -147,3 +147,13 @@ for(const id of["busca","filtro-tipo","filtro-status"])campo(id).addEventListene
 campo("recarregar").addEventListener("click",()=>carregar().then(()=>avisar("Lista atualizada.")).catch(erro=>avisar(erro.message)));
 for(const id of["recalcular","ponderar"])campo(id).addEventListener(id==="ponderar"?"change":"click",()=>carregarRiscos().catch(erro=>avisar(erro.message)));
 carregar().catch(erro=>avisar(erro.message));
+
+campo("exportar").addEventListener("click",async()=>{
+  try{
+    const dados=await requisitar("/api/exportacao");
+    const url=URL.createObjectURL(new Blob([JSON.stringify(dados,null,2)],{type:"application/json"}));
+    const link=document.createElement("a");link.href=url;link.download="equipamentos.json";
+    document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+    avisar("Arquivo JSON exportado.");
+  }catch(erro){avisar(erro.message);}
+});

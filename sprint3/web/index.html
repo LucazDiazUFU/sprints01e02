@@ -24,14 +24,14 @@
         <button id="novo-ativo" class="principal">Novo ativo</button>
       </header>
       <p id="mensagem" role="status" aria-live="polite"></p>
-      <details class="acesso"><summary>Acesso de edição</summary><label for="token">Credencial, se exigida pelo responsável</label><input id="token" type="password" autocomplete="off"><p>A credencial fica somente nesta sessão da página.</p></details>
+      <details class="acesso"><summary>Acessar inventário</summary><label for="token">Credencial do inventário</label><input id="token" type="password" autocomplete="off"><p>Informe a credencial e clique em Atualizar lista. Ela fica somente na memória desta página.</p></details>
       <section class="indicadores" aria-label="Resumo do inventário">
         <article><span>Ativos cadastrados</span><strong id="total-ativos">0</strong></article>
         <article><span>Vulnerabilidades</span><strong id="total-vulnerabilidades">0</strong></article>
         <article><span>Ativos em manutenção</span><strong id="total-manutencao">0</strong></article>
       </section>
       <section id="pagina-ativos" aria-labelledby="titulo-lista">
-        <div class="barra"><h2 id="titulo-lista">Seus ativos</h2><button id="recarregar">Atualizar lista</button></div>
+        <div class="barra"><h2 id="titulo-lista">Seus ativos</h2><div class="acoes"><button id="exportar">Baixar JSON</button><button id="recarregar">Atualizar lista</button></div></div>
         <div class="filtros">
           <div><label for="busca">Nome do ativo</label><input id="busca" type="search" placeholder="Buscar pelo nome"></div>
           <div><label for="filtro-tipo">Tipo</label><select id="filtro-tipo"><option value="">Todos os tipos</option><option value="1">Notebook</option><option value="2">Servidor</option><option value="3">Roteador</option><option value="4">Aplicação web</option><option value="5">Banco de dados</option><option value="6">Estação de trabalho</option></select></div>

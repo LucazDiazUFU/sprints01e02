@@ -9,3 +9,8 @@ dados/
 htmlcov/
 .pytest_cache/
 
+.env.*
+!.env.example
+!deploy/.env.completo.example
+backups/
+*.sql.gz

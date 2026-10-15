@@ -1,0 +1,89 @@
+[
+  {
+    "id": 101,
+    "nome": "notebook-01",
+    "responsavel": "Lucas",
+    "setor": "TI",
+    "tipo": 1,
+    "criticidade": "MEDIA",
+    "status": "ATIVO",
+    "descricao": "",
+    "vulnerabilidades": [
+      {
+        "id": 201,
+        "descricao": "Configuração insegura",
+        "categoria": "Configuração",
+        "severidade": "MEDIA",
+        "status": "ABERTA",
+        "cve": "",
+        "cvss": 4.0,
+        "referencia": "",
+        "recomendacao": ""
+      },
+      {
+        "id": 202,
+        "descricao": "Atualização pendente",
+        "categoria": "Software",
+        "severidade": "ALTA",
+        "status": "ABERTA",
+        "cve": "",
+        "cvss": 6.0,
+        "referencia": "",
+        "recomendacao": ""
+      }
+    ],
+    "dependencias": {
+      "102": 0.2
+    }
+  },
+  {
+    "id": 102,
+    "nome": "servidor-01",
+    "responsavel": "Lucas",
+    "setor": "TI",
+    "tipo": 2,
+    "criticidade": "MEDIA",
+    "status": "ATIVO",
+    "descricao": "",
+    "vulnerabilidades": [
+      {
+        "id": 203,
+        "descricao": "Serviço exposto",
+        "categoria": "Rede",
+        "severidade": "ALTA",
+        "status": "ABERTA",
+        "cve": "",
+        "cvss": 8.0,
+        "referencia": "",
+        "recomendacao": ""
+      }
+    ],
+    "dependencias": {
+      "103": 0.25
+    }
+  },
+  {
+    "id": 103,
+    "nome": "roteador-01",
+    "responsavel": "Lucas",
+    "setor": "Rede",
+    "tipo": 3,
+    "criticidade": "MEDIA",
+    "status": "ATIVO",
+    "descricao": "",
+    "vulnerabilidades": [
+      {
+        "id": 204,
+        "descricao": "Configuração antiga",
+        "categoria": "Configuração",
+        "severidade": "BAIXA",
+        "status": "ABERTA",
+        "cve": "",
+        "cvss": 2.0,
+        "referencia": "",
+        "recomendacao": ""
+      }
+    ],
+    "dependencias": {}
+  }
+]
