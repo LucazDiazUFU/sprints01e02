@@ -20,16 +20,17 @@ jobs:
       - run: python -m coverage report -m
   container:
     runs-on: ubuntu-latest
+    env:
+      DB_NAME: trabalho02_ci
+      DB_USER: trabalho02_ci
+      DB_PASSWORD: senha_apenas_para_ci_local
+      DB_ROOT_PASSWORD: outra_senha_apenas_para_ci
+      INVENTARIO_TOKEN: token_apenas_para_ci_com_mais_de_32_caracteres
     steps:
       - uses: actions/checkout@v6
-      - run: docker build -t inventario-s3 .
-      - run: docker run -d --name inventario-s3 -p 127.0.0.1:5000:5000 inventario-s3
-      - run: |
-          for tentativa in $(seq 1 20); do
-            if curl --fail http://127.0.0.1:5000/api/saude; then exit 0; fi
-            sleep 2
-          done
-          docker logs inventario-s3
-          exit 1
+      - run: docker compose -f compose.completo.yaml up --build -d --wait --wait-timeout 180
+      - run: curl --fail http://127.0.0.1:5000/api/saude
       - if: always()
-        run: docker logs inventario-s3
+        run: docker compose -f compose.completo.yaml logs --tail 100
+      - if: always()
+        run: docker compose -f compose.completo.yaml down

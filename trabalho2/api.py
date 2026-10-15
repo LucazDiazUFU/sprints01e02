@@ -2,13 +2,16 @@ import os
 from pathlib import Path
 import secrets
 import sqlite3
+
+import pymysql
 from threading import RLock
 import time
 
 from flask import Flask, jsonify, request, send_from_directory
 from werkzeug.exceptions import HTTPException
 
-from .banco import RepositorioSQL, VersaoDesatualizada
+from .banco import VersaoDesatualizada
+from .repositorios import criar_repositorio
 from .cadastro import Inventario
 from .modelos import criar_equipamento
 from .risco import AnaliseRisco
@@ -31,9 +34,11 @@ def criar_app(caminho=None, token=None):
     app = Flask(__name__)
     app.json.ensure_ascii = False
     app.config["MAX_CONTENT_LENGTH"] = 1024 * 1024
-    caminho = caminho or os.getenv("INVENTARIO_BANCO", "dados/inventario.db")
     token = os.getenv("INVENTARIO_TOKEN", "") if token is None else token
-    servico = ServicoInventario(RepositorioSQL(caminho))
+    producao = os.getenv("INVENTARIO_PRODUCAO", "0") == "1"
+    if producao and (len(token) < 32 or token.startswith("SUBSTITUA")):
+        raise ValueError("Em produção, configure INVENTARIO_TOKEN com 32 caracteres ou mais.")
+    servico = ServicoInventario(criar_repositorio(caminho))
     app.extensions["inventario"] = servico
     inicio = time.monotonic()
     web = Path(__file__).resolve().parents[1] / "sprint3" / "web"
@@ -58,11 +63,9 @@ def criar_app(caminho=None, token=None):
 
     @app.before_request
     def autorizar():
-        if request.path.startswith("/api/") and request.method not in {
-            "GET",
-            "HEAD",
-            "OPTIONS",
-        }:
+        protegida = request.path.startswith("/api/") and request.path != "/api/saude"
+        escrita = request.method not in {"GET", "HEAD", "OPTIONS"}
+        if protegida and (producao or escrita):
             recebido = request.headers.get("X-Token", "")
             if token and not secrets.compare_digest(token.encode(), recebido.encode()):
                 return jsonify(erro="A operação exige uma credencial válida."), 401
@@ -93,7 +96,7 @@ def criar_app(caminho=None, token=None):
             return jsonify(erro=str(erro)), codigo
         if isinstance(erro, HTTPException):
             return jsonify(erro=erro.description), erro.code
-        if isinstance(erro, sqlite3.Error):
+        if isinstance(erro, (sqlite3.Error, pymysql.MySQLError)):
             app.logger.exception("Falha no armazenamento")
             return jsonify(erro="Não foi possível acessar a base de dados."), 503
         app.logger.exception("Falha na operação")
@@ -110,7 +113,12 @@ def criar_app(caminho=None, token=None):
     @app.get("/api/saude")
     def saude():
         with servico.repositorio.conectar() as conexao:
-            conexao.execute("SELECT 1").fetchone()
+            if isinstance(conexao, sqlite3.Connection):
+                conexao.execute("SELECT 1").fetchone()
+            else:
+                with conexao.cursor() as cursor:
+                    cursor.execute("SELECT 1")
+                    cursor.fetchone()
         return jsonify(status="ok", segundos_ativo=round(time.monotonic() - inicio, 2))
 
     @app.get("/api/ativos")

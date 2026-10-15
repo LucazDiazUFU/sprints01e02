@@ -1,14 +1,15 @@
-from pathlib import Path
+
+import pymysql
 
 from trabalho1 import app as menu_anterior
 
-from .armazenamento import RepositorioJSON
+from .repositorios import criar_repositorio
 from .risco import AnaliseRisco
 
 
 class Aplicacao:
     def __init__(self, caminho="dados/equipamentos.json"):
-        self.repositorio = RepositorioJSON(Path(caminho))
+        self.repositorio = criar_repositorio(caminho, terminal=True)
         self.inventario = self.repositorio.carregar()
 
     def cadastrar_ativo(self):
@@ -118,6 +119,8 @@ class Aplicacao:
             except (ValueError, LookupError) as erro:
                 print(f"Erro: {erro}")
                 self.inventario = self.repositorio.carregar()
+            except pymysql.MySQLError:
+                print("Não foi possível acessar o MariaDB. Confira a conexão.")
             except (EOFError, KeyboardInterrupt):
                 print("\nEncerrado.")
                 break
