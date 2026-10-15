@@ -1,0 +1,31 @@
+$ python3 -m coverage report -m
+Name                          Stmts   Miss  Cover   Missing
+-----------------------------------------------------------
+sprint3/__init__.py               1      0   100%
+sprint3/cenario.py               13      0   100%
+sprint3/gerar_evidencias.py      15     15     0%   1-35
+sprint3/refatoracao.py            9      0   100%
+sprint3/s3_01.py                 22     22     0%   1-34
+sprint3/s3_02.py                 44     10    77%   22, 31, 41, 48-50, 54-60, 79
+sprint3/s3_03.py                 64     11    83%   73-83
+sprint3/s3_04.py                 15     15     0%   1-28
+sprint3/s3_05.py                 71     16    77%   65-76, 80-86, 102
+sprint3/s3_09.py                 20     20     0%   1-44
+sprint3/s3_10.py                 41      7    83%   12, 19, 46-49, 68
+sprint3/s3_11.py                 32     13    59%   20, 22, 34-44
+sprint3/s3_12.py                 15     15     0%   1-41
+sprint3/s3_13.py                  8      1    88%   29
+sprint3/s3_14.py                  9      2    78%   14-29
+sprint3/s3_20.py                 10     10     0%   1-15
+trabalho2/__init__.py             1      0   100%
+trabalho2/api.py                193     18    91%   88, 96-100, 108, 132, 182, 191, 199-205, 214, 233, 250, 256, 277, 292
+trabalho2/app.py                 75     47    37%   15, 18, 21, 24, 27, 30, 33, 39, 56, 59-63, 66-69, 72-82, 85-123
+trabalho2/armazenamento.py       36      5    86%   22, 48-51
+trabalho2/banco.py               54      0   100%
+trabalho2/cadastro.py            59      7    88%   15, 46, 52, 63, 70, 96, 103
+trabalho2/modelos.py             68     12    82%   15, 20, 27-28, 32, 46, 51, 67, 72, 87, 93-94
+trabalho2/risco.py               47      5    89%   13, 15, 26-27, 29
+-----------------------------------------------------------
+TOTAL                           922    251    73%
+
+Exit: 0

@@ -3,3 +3,9 @@ __pycache__/
 .venv/
 trabalho1/ativos.json
 *.tmp
+dados/
+.env
+.coverage
+htmlcov/
+.pytest_cache/
+

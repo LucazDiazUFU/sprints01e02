@@ -1,0 +1,20 @@
+[
+  {
+    "n": 10,
+    "linear": 10,
+    "binaria": 4,
+    "duplo_laco": 100
+  },
+  {
+    "n": 100,
+    "linear": 100,
+    "binaria": 7,
+    "duplo_laco": 10000
+  },
+  {
+    "n": 1000,
+    "linear": 1000,
+    "binaria": 10,
+    "duplo_laco": 1000000
+  }
+]

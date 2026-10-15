@@ -1,0 +1,3 @@
+Contraste de pares usados nos protótipos. Não é auditoria integral da tela.
+#16324f sobre #ffffff: 13.10:1
+#16324f sobre #f4f7fb: 12.19:1

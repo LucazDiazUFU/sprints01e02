@@ -1,0 +1,8 @@
+[MAIN]
+py-version=3.12
+
+[MESSAGES CONTROL]
+disable=missing-module-docstring,missing-class-docstring,missing-function-docstring,too-few-public-methods,too-many-instance-attributes,too-many-arguments,too-many-positional-arguments,redefined-builtin,too-many-locals,too-many-statements
+
+[FORMAT]
+max-line-length=100

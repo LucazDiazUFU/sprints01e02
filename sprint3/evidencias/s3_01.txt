@@ -1,0 +1,16 @@
+Notebook | Ativo 101: notebook-01 | Lucas | TI
+Notebook: True
+Servidor: False
+Roteador: False
+Servidor | Ativo 102: servidor-01 | Lucas | TI
+Notebook: False
+Servidor: True
+Roteador: False
+Roteador | Ativo 103: roteador-01 | Lucas | Rede
+Notebook: False
+Servidor: False
+Roteador: True
+Tipos recarregados: ['Notebook', 'Servidor', 'Roteador']
+IDs recarregados: [101, 102, 103]
+Dependências: {102: 0.2}
+Vulnerabilidades: [201, 202]

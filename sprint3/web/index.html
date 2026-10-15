@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inventário de ativos</title>
+  <link rel="stylesheet" href="/web/estilo.css">
+  <script src="/web/app.js" defer></script>
+</head>
+<body>
+  <a class="pular" href="#conteudo">Ir para o conteúdo</a>
+  <div class="estrutura">
+    <aside>
+      <div class="marca">INVENTÁRIO<span>Ativos e segurança</span></div>
+      <nav aria-label="Seções do inventário">
+        <button class="selecionado" data-pagina="ativos" aria-current="page">Ativos</button>
+        <button data-pagina="riscos">Análise de risco</button>
+      </nav>
+      <p class="nota">Mantenha os dados dos ativos e acompanhe suas vulnerabilidades.</p>
+    </aside>
+    <main id="conteudo" tabindex="-1">
+      <header>
+        <div><p class="sobretitulo">Visão do inventário</p><h1>Ativos de TI</h1></div>
+        <button id="novo-ativo" class="principal">Novo ativo</button>
+      </header>
+      <p id="mensagem" role="status" aria-live="polite"></p>
+      <details class="acesso"><summary>Acesso de edição</summary><label for="token">Credencial, se exigida pelo responsável</label><input id="token" type="password" autocomplete="off"><p>A credencial fica somente nesta sessão da página.</p></details>
+      <section class="indicadores" aria-label="Resumo do inventário">
+        <article><span>Ativos cadastrados</span><strong id="total-ativos">0</strong></article>
+        <article><span>Vulnerabilidades</span><strong id="total-vulnerabilidades">0</strong></article>
+        <article><span>Ativos em manutenção</span><strong id="total-manutencao">0</strong></article>
+      </section>
+      <section id="pagina-ativos" aria-labelledby="titulo-lista">
+        <div class="barra"><h2 id="titulo-lista">Seus ativos</h2><button id="recarregar">Atualizar lista</button></div>
+        <div class="filtros">
+          <div><label for="busca">Nome do ativo</label><input id="busca" type="search" placeholder="Buscar pelo nome"></div>
+          <div><label for="filtro-tipo">Tipo</label><select id="filtro-tipo"><option value="">Todos os tipos</option><option value="1">Notebook</option><option value="2">Servidor</option><option value="3">Roteador</option><option value="4">Aplicação web</option><option value="5">Banco de dados</option><option value="6">Estação de trabalho</option></select></div>
+          <div><label for="filtro-status">Situação</label><select id="filtro-status"><option value="">Todas</option><option value="ATIVO">Ativo</option><option value="INATIVO">Inativo</option><option value="MANUTENCAO">Manutenção</option></select></div>
+        </div>
+        <div class="tabela"><table><caption class="somente-leitor">Ativos encontrados e ações disponíveis</caption><thead><tr><th scope="col">ID e ativo</th><th scope="col">Tipo</th><th scope="col">Responsável e setor</th><th scope="col">Situação</th><th scope="col">Ações</th></tr></thead><tbody id="linhas-ativos"></tbody></table></div>
+        <p id="vazio" hidden>Nenhum ativo encontrado. Cadastre um ativo ou ajuste os filtros.</p>
+      </section>
+      <section id="pagina-riscos" hidden aria-labelledby="titulo-risco">
+        <div class="barra"><h2 id="titulo-risco">Risco próprio e efetivo</h2><button id="recalcular">Recalcular</button></div>
+        <p>O risco próprio soma as severidades registradas. O risco efetivo inclui o risco transmitido pelas dependências.</p>
+        <label class="linha-checkbox"><input id="ponderar" type="checkbox">Considerar fatores de exposição por tipo de ativo</label>
+        <div class="tabela"><table><caption class="somente-leitor">Resultados da análise de risco</caption><thead><tr><th scope="col">Ativo</th><th scope="col">Risco próprio</th><th scope="col">Risco efetivo</th></tr></thead><tbody id="linhas-riscos"></tbody></table></div>
+        <p id="precisao"></p>
+        <h2>Dependências</h2>
+        <p>Selecione o ativo que recebe o risco e o ativo do qual ele depende. A soma das frações de um ativo precisa ser menor que 1.</p>
+        <form id="form-dependencia" class="filtros">
+          <div><label for="origem">Ativo que recebe o risco</label><select id="origem" required></select></div>
+          <div><label for="destino">Depende do ativo</label><select id="destino" required></select></div>
+          <div><label for="peso">Fração transmitida</label><input id="peso" type="number" min="0" max="0.999" step="0.001" required value="0.2"></div>
+          <button class="principal" type="submit">Salvar dependência</button>
+        </form>
+        <ul id="dependencias"></ul>
+      </section>
+    </main>
+  </div>
+  <dialog id="dialog-ativo" aria-labelledby="titulo-ativo">
+    <div class="barra"><h2 id="titulo-ativo">Novo ativo</h2><button type="button" data-fechar="dialog-ativo">Fechar</button></div>
+    <form id="form-ativo">
+      <div class="campos">
+        <div><label for="id-ativo">ID inteiro</label><input id="id-ativo" name="id" type="number" min="1" step="1" required></div>
+        <div><label for="nome">Nome ou hostname</label><input id="nome" name="nome" maxlength="120" required></div>
+        <div><label for="responsavel">Responsável</label><input id="responsavel" name="responsavel" maxlength="120" required></div>
+        <div><label for="setor">Setor ou localização</label><input id="setor" name="setor" maxlength="120" required></div>
+        <div><label for="tipo">Tipo</label><select id="tipo" name="tipo"><option value="1">Notebook</option><option value="2">Servidor</option><option value="3">Roteador</option><option value="4">Aplicação web</option><option value="5">Banco de dados</option><option value="6">Estação de trabalho</option></select></div>
+        <div><label for="status">Situação</label><select id="status" name="status"><option value="ATIVO">Ativo</option><option value="INATIVO">Inativo</option><option value="MANUTENCAO">Manutenção</option></select></div>
+        <div><label for="criticidade">Criticidade</label><select id="criticidade" name="criticidade"><option value="BAIXA">Baixa</option><option value="MEDIA" selected>Média</option><option value="ALTA">Alta</option><option value="CRITICA">Crítica</option></select></div>
+        <div><label for="descricao-ativo">Descrição</label><input id="descricao-ativo" name="descricao" maxlength="500"></div>
+      </div>
+      <p id="erro-ativo" role="alert"></p>
+      <div class="rodape-form"><button type="button" data-fechar="dialog-ativo">Cancelar</button><button class="principal" type="submit">Salvar ativo</button></div>
+    </form>
+  </dialog>
+  <dialog id="dialog-vulnerabilidades" aria-labelledby="titulo-vulnerabilidades">
+    <div class="barra"><h2 id="titulo-vulnerabilidades">Vulnerabilidades</h2><button type="button" data-fechar="dialog-vulnerabilidades">Fechar</button></div>
+    <ul id="lista-vulnerabilidades"></ul>
+    <h3 id="titulo-form-vulnerabilidade">Cadastrar vulnerabilidade</h3>
+    <form id="form-vulnerabilidade">
+      <div class="campos">
+        <div><label for="id-vulnerabilidade">ID inteiro</label><input id="id-vulnerabilidade" type="number" min="1" step="1" required></div>
+        <div><label for="descricao">Descrição</label><input id="descricao" maxlength="500" required></div>
+        <div><label for="categoria">Categoria</label><input id="categoria" maxlength="120" required></div>
+        <div><label for="severidade">Severidade</label><select id="severidade"><option value="BAIXA">Baixa</option><option value="MEDIA">Média</option><option value="ALTA">Alta</option><option value="CRITICA">Crítica</option></select></div>
+        <div><label for="status-vulnerabilidade">Tratamento</label><select id="status-vulnerabilidade"><option value="ABERTA">Aberta</option><option value="EM_TRATAMENTO">Em tratamento</option><option value="CORRIGIDA">Corrigida</option><option value="RISCO_ACEITO">Risco aceito</option></select></div>
+        <div><label for="cve">CVE (opcional)</label><input id="cve" maxlength="25"></div>
+        <div><label for="cvss">CVSS (opcional)</label><input id="cvss" type="number" min="0" max="10" step="0.1"></div>
+        <div><label for="referencia">Referência (opcional)</label><input id="referencia" maxlength="500"></div>
+        <div><label for="recomendacao">Recomendação (opcional)</label><input id="recomendacao" maxlength="500"></div>
+      </div>
+      <p id="erro-vulnerabilidade" role="alert"></p>
+      <div class="rodape-form"><button type="button" id="limpar-vulnerabilidade">Novo registro</button><button class="principal" type="submit">Salvar vulnerabilidade</button></div>
+    </form>
+  </dialog>
+</body>
+</html>

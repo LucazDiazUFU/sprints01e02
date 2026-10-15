@@ -53,3 +53,8 @@ Use dados de exemplo na apresentação. Treine a explicação das classes, do di
 As regras de entrada foram concentradas em `validacoes.py` para evitar validações diferentes entre cadastro e atualização. `cadastro.py` cuida dos dados e `app.py` cuida das perguntas ao usuário. A classe `Inventario` guarda os ativos em `dict` indexado pelo ID, enquanto cada ativo guarda sua lista de vulnerabilidades. A função de gravação usa um arquivo temporário e substitui o JSON anterior após concluir a escrita. Não há senhas, chaves ou dados reais no repositório.
 
 Os exercícios da S1 estão em `sprint1/`. A [especificação](docs/especificacao.md) relaciona os dez requisitos do enunciado ao código e aos testes. Os exemplos de CVE em `sprint2/` são cenários de estudo; não afirmam que há sistemas vulneráveis em uma organização real.
+
+
+## Sprint 3
+
+A nova entrega está em [sprint3/LEIA-ME.md](sprint3/LEIA-ME.md). Inclui exercícios, relatórios, interface, API, SQLite, persistência JSON e cálculo de risco. O código do Trabalho 01 permanece disponível.

@@ -1,0 +1,54 @@
+[
+  {
+    "p": false,
+    "q": false,
+    "p_e_q": false,
+    "p_ou_q": false,
+    "p_implica_q": true,
+    "de_morgan_esquerda": true,
+    "de_morgan_direita": true,
+    "tautologia": true,
+    "contradicao": false,
+    "modus_ponens": true,
+    "afirmar_consequente": true
+  },
+  {
+    "p": false,
+    "q": true,
+    "p_e_q": false,
+    "p_ou_q": true,
+    "p_implica_q": true,
+    "de_morgan_esquerda": true,
+    "de_morgan_direita": true,
+    "tautologia": true,
+    "contradicao": false,
+    "modus_ponens": true,
+    "afirmar_consequente": false
+  },
+  {
+    "p": true,
+    "q": false,
+    "p_e_q": false,
+    "p_ou_q": true,
+    "p_implica_q": false,
+    "de_morgan_esquerda": true,
+    "de_morgan_direita": true,
+    "tautologia": true,
+    "contradicao": false,
+    "modus_ponens": true,
+    "afirmar_consequente": true
+  },
+  {
+    "p": true,
+    "q": true,
+    "p_e_q": true,
+    "p_ou_q": true,
+    "p_implica_q": true,
+    "de_morgan_esquerda": false,
+    "de_morgan_direita": false,
+    "tautologia": true,
+    "contradicao": false,
+    "modus_ponens": true,
+    "afirmar_consequente": true
+  }
+]
