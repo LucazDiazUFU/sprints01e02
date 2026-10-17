@@ -35,7 +35,7 @@ python3 main_trabalho2.py
 python3 -m flask --app trabalho2.api:criar_app run --host 127.0.0.1 --port 5000
 ```
 
-O terminal e o servidor usam bases distintas. Abra http://127.0.0.1:5000 para a interface. Os arquivos de dados não devem ser enviados ao GitHub.
+O terminal e o servidor usam o mesmo arquivo, dados/equipamentos.json. Abra http://127.0.0.1:5000 para a interface. Os arquivos de dados não devem ser enviados ao GitHub.
 
 ```bash
 python3 -m pytest -q

@@ -53,7 +53,9 @@ class TesteTrabalho2(unittest.TestCase):
         repositorio.caminho.write_text("arquivo inválido", encoding="utf-8")
         with self.assertRaises(ValueError):
             repositorio.carregar()
-        self.assertEqual(repositorio.caminho.read_text(), "arquivo inválido")
+        self.assertEqual(
+            repositorio.caminho.read_text(encoding="utf-8"), "arquivo inválido"
+        )
 
     def test_mudanca_tipo_recria_subclasse(self):
         ativo = self.inventario.atualizar_ativo(101, tipo=2)
@@ -141,7 +143,7 @@ class TesteAPI(unittest.TestCase):
     def setUp(self):
         self.pasta = TemporaryDirectory()
         self.addCleanup(self.pasta.cleanup)
-        self.banco = Path(self.pasta.name) / "api.db"
+        self.banco = Path(self.pasta.name) / "api.json"
         self.app = criar_app(self.banco, token="")
         self.app.testing = True
         self.cliente = self.app.test_client()
@@ -175,6 +177,12 @@ class TesteAPI(unittest.TestCase):
             novo.delete("/api/ativos/101", json={"confirmar": True}).status_code, 204
         )
         self.assertEqual(novo.get("/api/ativos/101").status_code, 404)
+
+    def test_arquivo_da_api_e_lista_json(self):
+        self.cadastrar()
+        conteudo = json.loads(self.banco.read_text(encoding="utf-8"))
+        self.assertIsInstance(conteudo, list)
+        self.assertEqual(conteudo[0]["nome"], "notebook-01")
 
     def test_cadastro_invalido_e_duplicado(self):
         self.assertEqual(
