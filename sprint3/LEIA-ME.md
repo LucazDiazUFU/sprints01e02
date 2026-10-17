@@ -1,6 +1,6 @@
 # Sprint 3
 
-A entrega mantém os campos e as regras do Trabalho 01 e acrescenta os assuntos da S3. Os códigos novos não têm comentários. Cada atividade possui um relatório com arquivos, resultados e limites.
+A entrega mantém os campos e as regras do Trabalho 01 e acrescenta os assuntos da S3. Cada atividade possui um relatório com arquivos, resultados e limites.
 
 | Atividade | Relatório |
 |---|---|
@@ -44,6 +44,6 @@ docker compose up --build -d
 python3 scripts/verificar_24h.py --url http://127.0.0.1:5000
 ```
 
-O monitoramento padrão dura 86400 segundos. O teste curto só verifica o monitor, sem comprovar 24h. O servidor do docente e o acesso necessário devem ser providenciados por Lucas. O protótipo SVG precisa ser importado no Figma para concluir essa parte da S3_15. A revisão humana da S3_08 e a apresentação ficam com Lucas.
+O monitoramento padrão dura 86400 segundos. O teste curto só verifica o monitor, sem comprovar 24h.
 
-A atividade Trabalho 02 copiada no Product Backlog inclui Sprints 3, 4 e 5. Esta entrega cobre a base da Sprint 3; não declara o trabalho inteiro concluído.
+O Trabalho 02 cobre as Sprints 3, 4 e 5. Esta entrega traz a base da Sprint 3.

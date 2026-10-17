@@ -33,4 +33,4 @@ O programa apresenta os campos ao cadastrar, consultar, atualizar e excluir. Men
 
 ## Restrições e revisão
 
-O programa precisa de Python 3.10 ou superior e usa somente a biblioteca padrão. Dados reais e segredos não entram no repositório. Os testes automatizados verificam regras centrais; a revisão final, a apresentação de cinco minutos e a explicação individual são responsabilidade do estudante.
+O programa precisa de Python 3.10 ou superior e usa somente a biblioteca padrão. Dados reais e segredos não entram no repositório. Os testes automatizados verificam regras centrais.
