@@ -1,14 +1,13 @@
 import os
 from pathlib import Path
 import secrets
-import sqlite3
 from threading import RLock
 import time
 
 from flask import Flask, jsonify, request, send_from_directory
 from werkzeug.exceptions import HTTPException
 
-from .banco import RepositorioSQL, VersaoDesatualizada
+from .armazenamento import RepositorioJSON
 from .cadastro import Inventario
 from .modelos import criar_equipamento
 from .risco import AnaliseRisco
@@ -31,9 +30,9 @@ def criar_app(caminho=None, token=None):
     app = Flask(__name__)
     app.json.ensure_ascii = False
     app.config["MAX_CONTENT_LENGTH"] = 1024 * 1024
-    caminho = caminho or os.getenv("INVENTARIO_BANCO", "dados/inventario.db")
+    caminho = caminho or os.getenv("INVENTARIO_ARQUIVO", "dados/equipamentos.json")
     token = os.getenv("INVENTARIO_TOKEN", "") if token is None else token
-    servico = ServicoInventario(RepositorioSQL(caminho))
+    servico = ServicoInventario(RepositorioJSON(caminho))
     app.extensions["inventario"] = servico
     inicio = time.monotonic()
     web = Path(__file__).resolve().parents[1] / "sprint3" / "web"
@@ -84,8 +83,6 @@ def criar_app(caminho=None, token=None):
 
     @app.errorhandler(Exception)
     def tratar_erro(erro):
-        if isinstance(erro, VersaoDesatualizada):
-            return jsonify(erro=str(erro)), 409
         if isinstance(erro, LookupError):
             return jsonify(erro=str(erro)), 404
         if isinstance(erro, ValueError):
@@ -93,7 +90,7 @@ def criar_app(caminho=None, token=None):
             return jsonify(erro=str(erro)), codigo
         if isinstance(erro, HTTPException):
             return jsonify(erro=erro.description), erro.code
-        if isinstance(erro, sqlite3.Error):
+        if isinstance(erro, OSError):
             app.logger.exception("Falha no armazenamento")
             return jsonify(erro="Não foi possível acessar a base de dados."), 503
         app.logger.exception("Falha na operação")
@@ -109,8 +106,7 @@ def criar_app(caminho=None, token=None):
 
     @app.get("/api/saude")
     def saude():
-        with servico.repositorio.conectar() as conexao:
-            conexao.execute("SELECT 1").fetchone()
+        servico.repositorio.carregar()
         return jsonify(status="ok", segundos_ativo=round(time.monotonic() - inicio, 2))
 
     @app.get("/api/ativos")
@@ -277,12 +273,8 @@ def criar_app(caminho=None, token=None):
             raise ValueError("A importação exige uma lista de objetos JSON.")
         novo = Inventario([criar_equipamento(item) for item in conteudo])
 
-        def substituir(inventario):
-            novo.versao = inventario.versao
-            servico.repositorio.salvar(novo)
-
         with servico.trava:
-            substituir(servico.repositorio.carregar())
+            servico.repositorio.salvar(novo)
         return jsonify(total=len(novo.ativos)), 201
 
     return app
