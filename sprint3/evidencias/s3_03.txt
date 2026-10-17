@@ -1,0 +1,4 @@
+FilaLista 101 102
+FilaDeque 101 102
+Antes: [101, 102, 103]
+Depois: [101, 103]

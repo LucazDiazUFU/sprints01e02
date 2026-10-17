@@ -1,0 +1,43 @@
+{
+  "ativos": [
+    {
+      "id": 101,
+      "nome": "notebook-01"
+    },
+    {
+      "id": 102,
+      "nome": "servidor-01"
+    },
+    {
+      "id": 103,
+      "nome": "roteador-01"
+    }
+  ],
+  "busca_102": [
+    1,
+    1
+  ],
+  "comparacoes": [
+    {
+      "tamanho": 10,
+      "bubble_sort": 45,
+      "selection_sort": 45,
+      "insertion_sort": 45,
+      "busca_binaria": 4
+    },
+    {
+      "tamanho": 50,
+      "bubble_sort": 1225,
+      "selection_sort": 1225,
+      "insertion_sort": 1225,
+      "busca_binaria": 6
+    },
+    {
+      "tamanho": 100,
+      "bubble_sort": 4950,
+      "selection_sort": 4950,
+      "insertion_sort": 4950,
+      "busca_binaria": 7
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+name: Sprint 3 - testes e qualidade
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m black --check trabalho2 sprint3 tests/test_trabalho2.py tests/test_sprint3.py main_trabalho2.py scripts
+      - run: python -m flake8 trabalho2 sprint3 tests/test_trabalho2.py tests/test_sprint3.py main_trabalho2.py scripts
+      - run: python -m pylint trabalho2 sprint3 main_trabalho2.py scripts
+      - run: python -m coverage run --source=trabalho2,sprint3 -m pytest -q
+      - run: python -m coverage report -m
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: docker build -t inventario-s3 .
+      - run: docker run -d --name inventario-s3 -p 127.0.0.1:5000:5000 inventario-s3
+      - run: |
+          for tentativa in $(seq 1 20); do
+            if curl --fail http://127.0.0.1:5000/api/saude; then exit 0; fi
+            sleep 2
+          done
+          docker logs inventario-s3
+          exit 1
+      - if: always()
+        run: docker logs inventario-s3

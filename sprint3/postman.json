@@ -1,0 +1,388 @@
+{
+  "info": {
+    "name": "Sprint 3 - inventário",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:5000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Saúde",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Token",
+            "value": "{{token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/saude"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Aplicação saudável\", () => pm.expect(pm.response.json().status).to.eql(\"ok\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cadastrar notebook",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Token",
+            "value": "{{token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/ativos",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"id\": 991, \"nome\": \"postman-notebook\", \"responsavel\": \"Pessoa exemplo\", \"setor\": \"Laboratório\", \"tipo\": 1}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 201\", () => pm.response.to.have.status(201));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Recusar ID repetido",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Token",
+            "value": "{{token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/ativos",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"id\": 991, \"nome\": \"postman-notebook\", \"responsavel\": \"Pessoa exemplo\", \"setor\": \"Laboratório\", \"tipo\": 1}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 409\", () => pm.response.to.have.status(409));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Consultar notebook",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Token",
+            "value": "{{token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/ativos/991"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"ID preservado\", () => pm.expect(pm.response.json().id).to.eql(991));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Atualizar ativo completo",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Token",
+            "value": "{{token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/ativos/991",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nome\": \"postman-notebook\", \"responsavel\": \"Pessoa exemplo\", \"setor\": \"Redes\", \"tipo\": 1}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Atualizar parcialmente",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Token",
+            "value": "{{token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/ativos/991",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"setor\": \"Suporte\"}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cadastrar vulnerabilidade",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Token",
+            "value": "{{token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/ativos/991/vulnerabilidades",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"id\": 992, \"descricao\": \"Cenário de teste\", \"categoria\": \"Configuração\", \"severidade\": \"MEDIA\", \"status\": \"ABERTA\", \"cvss\": 5}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 201\", () => pm.response.to.have.status(201));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Consultar risco",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Token",
+            "value": "{{token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/riscos"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Recusar exclusão sem confirmação",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Token",
+            "value": "{{token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/ativos/991",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"confirmar\": false}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 400\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Excluir vulnerabilidade",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Token",
+            "value": "{{token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/vulnerabilidades/992",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"confirmar\": true}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 204\", () => pm.response.to.have.status(204));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Excluir ativo",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Token",
+            "value": "{{token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/ativos/991",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"confirmar\": true}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 204\", () => pm.response.to.have.status(204));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Confirmar ausência",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Token",
+            "value": "{{token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/ativos/991"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 404\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

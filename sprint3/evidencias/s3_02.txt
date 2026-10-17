@@ -1,0 +1,48 @@
+{
+  "fatorial_iterativo": {
+    "resultado": 1307674368000,
+    "segundos": 2.474000211805105e-06
+  },
+  "fatorial_recursivo": {
+    "resultado": 1307674368000,
+    "segundos": 3.2149991966434754e-06
+  },
+  "fibonacci": {
+    "resultado": 75025,
+    "segundos": 0.03255717000047298
+  },
+  "fibonacci_memorizado": {
+    "resultado": 75025,
+    "segundos": 3.759499941224931e-05
+  },
+  "nomes": [
+    "ROTEADOR-01",
+    "NOTEBOOK-01",
+    "SERVIDOR-01"
+  ],
+  "servidores": [
+    {
+      "id": 102,
+      "nome": "servidor-01",
+      "tipo": 2
+    }
+  ],
+  "ordenados": [
+    {
+      "id": 101,
+      "nome": "notebook-01",
+      "tipo": 1
+    },
+    {
+      "id": 102,
+      "nome": "servidor-01",
+      "tipo": 2
+    },
+    {
+      "id": 103,
+      "nome": "roteador-01",
+      "tipo": 3
+    }
+  ],
+  "soma_ids": 306
+}

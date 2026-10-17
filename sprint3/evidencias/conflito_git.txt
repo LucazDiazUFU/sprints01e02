@@ -1,0 +1,54 @@
+Exercício executado em repositório temporário; não é conflito no repositório do usuário.
+$ git init -b base
+Initialized empty Git repository in /tmp/tmp_yx5wiq3/.git/
+
+$ git config user.name Exercício local
+
+$ git config user.email exercicio@example.invalid
+
+$ git add .
+
+$ git commit -m Criar título inicial
+[base (root-commit) 6c91760] Criar título inicial
+ 1 file changed, 1 insertion(+)
+ create mode 100644 titulo.txt
+
+$ git checkout -b feature/titulo
+Switched to a new branch 'feature/titulo'
+
+$ git commit -am Detalhar título
+[feature/titulo 70314ca] Detalhar título
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+$ git checkout base
+Switched to branch 'base'
+
+$ git commit -am Definir contexto de segurança
+[base b566451] Definir contexto de segurança
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+$ git merge feature/titulo
+Auto-merging titulo.txt
+CONFLICT (content): Merge conflict in titulo.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+<<<<<<< HEAD
+Inventário de segurança
+=======
+Inventário de ativos
+>>>>>>> feature/titulo
+
+$ git add titulo.txt
+
+$ git commit -m Resolver conflito reunindo contexto e ativos
+[base 022be81] Resolver conflito reunindo contexto e ativos
+
+$ git log --oneline --graph --all
+*   022be81 Resolver conflito reunindo contexto e ativos
+|\  
+| * 70314ca Detalhar título
+* | b566451 Definir contexto de segurança
+|/  
+* 6c91760 Criar título inicial
+
+$ git status --short

@@ -1,0 +1,7 @@
+$ python3 -m pylint trabalho2 sprint3 main_trabalho2.py scripts
+
+------------------------------------
+Your code has been rated at 10.00/10
+
+
+Exit: 0

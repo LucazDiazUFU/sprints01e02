@@ -1,0 +1,5 @@
+$ python3 -m black --check trabalho2 sprint3 tests/test_trabalho2.py tests/test_sprint3.py main_trabalho2.py scripts
+All done! ✨ 🍰 ✨
+28 files would be left unchanged.
+
+Exit: 0

@@ -1,0 +1,36 @@
+{
+  "soma": 0.30000000000000004,
+  "igualdade": false,
+  "com_tolerancia": true,
+  "truncado": 3.141,
+  "arredondado": 3.142,
+  "erro_truncamento": {
+    "absoluto": 0.0005926535897931018,
+    "relativo": 0.00018864749671345722
+  },
+  "erro_arredondamento": {
+    "absoluto": 0.0004073464102067881,
+    "relativo": 0.0001296623894702984
+  },
+  "dez_somas": 1.0,
+  "erro_propagado": {
+    "absoluto": 0.0,
+    "relativo": 0.0
+  },
+  "determinante": 1.0000000827403705e-10,
+  "condicao": 39999991794.0589,
+  "solve": [
+    1.0,
+    1.0
+  ],
+  "inv": [
+    1.0,
+    1.0
+  ],
+  "solve_perturbado": [
+    -98.99999111821654,
+    100.99999111821654
+  ],
+  "residuo_solve": 0.0,
+  "residuo_inv": 0.0
+}

@@ -1,0 +1,13 @@
+services:
+  inventario:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      INVENTARIO_TOKEN: ${INVENTARIO_TOKEN:-}
+    volumes:
+      - dados:/app/dados
+    restart: unless-stopped
+    stop_grace_period: 20s
+volumes:
+  dados:

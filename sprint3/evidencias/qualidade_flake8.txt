@@ -1,0 +1,3 @@
+$ python3 -m flake8 trabalho2 sprint3 tests/test_trabalho2.py tests/test_sprint3.py main_trabalho2.py scripts
+
+Exit: 0
